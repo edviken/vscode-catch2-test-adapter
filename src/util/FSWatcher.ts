@@ -30,7 +30,7 @@ export class ChokidarWrapper implements FSWatcher {
     const [cwd, children] = longestCommonPath(patterns);
     this._cwd = cwd;
     // Hard code some excludes for executable searching
-    let exclude = new RegExp(".*\.runfiles.*|.*\.cpp|/*\.params|.*\.so|.*\.so.[0-9]+|.*\.cpp|.*\.json|.*\.pic\..*|.*_hermetic_runner.*")
+    let exclude = new RegExp(".*\.runfiles.*|.*\.cpp|/*\.params|.*\.so|.*\.so.[0-9]+|.*\.cpp|.*\.json|.*\.pic\..*|.*_hermetic_runner.*|.*hermetic_library_check\.sh")
     this._impl = new chokidar.FSWatcher({ cwd, ignored: exclude, awaitWriteFinish: true, followSymlinks: true });
     this._readyP = Promise.resolve().then(async () => {
       const arr = await glob(children, { cwd, follow: true });
